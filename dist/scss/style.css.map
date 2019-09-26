@@ -1,0 +1,1 @@
+{"version":3,"sources":["scss/style.scss"],"names":[],"mappings":"AAEA,KACI,eAHgB,CAIhB,YAAa,CACb,eAAgB,CAChB,aAAc","file":"style.css","sourcesContent":["$primary-color: #fff;\n\nbody {\n    background: $primary-color;\n    height: 100vh;\n    max-width: 960px;\n    margin: 0 auto;\n}"]}

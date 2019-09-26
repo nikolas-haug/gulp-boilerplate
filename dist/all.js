@@ -1,0 +1,1 @@
+"use strict";var hello="Hello every body!";console.log(hello);var goodbye="goodbye!";console.log(goodbye);var testVar="test";console.log(testVar);

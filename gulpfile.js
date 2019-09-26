@@ -7,7 +7,10 @@ const uglify = require('gulp-uglify');
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
-var replace = require('gulp-replace');
+const babel = require('gulp-babel');
+var replace = require('gulp-replace'); // use for cachebust
+
+// TODO: add browsersync for wordpress dev
 
 // Create the file paths here in an object
 const files = {
@@ -25,3 +28,27 @@ function scssTask() {
         .pipe(dest('dist')) // indicate the destination of compiled CSS
 }
 
+// JS task setup
+function jsTask() {
+    return src([files.jsPath
+    // ,'!' + 'includes/js/jquery.min.js, // to exclude any specific files
+    ])
+    .pipe(babel({
+        presets: ['@babel/env']
+    }))
+    .pipe(concat('all.js'))
+    .pipe(uglify())
+    .pipe(dest('dist'))
+}
+
+// Watch task: watch SCSS and JS files for changes
+function watchTask() {
+    watch([files.scssPath, files.jsPath],
+        parallel(scssTask, jsTask));
+}
+
+// Export all tasks
+exports.default = series(
+    parallel(scssTask, jsTask),
+    watchTask
+);
